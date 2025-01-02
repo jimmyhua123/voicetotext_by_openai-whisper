@@ -9,9 +9,9 @@ import time
 def ensure_dependencies():
     try:
         subprocess.check_call(["pip", "install", "openai-whisper", "ffmpeg-python"])
-        messagebox.showinfo("依賴安裝", "所有依賴已安裝完成！")
+        messagebox.showinfo("套件安裝", "所有套件已安裝完成！")
     except Exception as e:
-        messagebox.showerror("錯誤", f"安裝依賴時發生錯誤：{e}")
+        messagebox.showerror("錯誤", f"安裝套件時發生錯誤：{e}")
 
 def update_progress(progress_label, text):
     progress_label.config(text=text)
@@ -108,8 +108,8 @@ include_timecodes_var = BooleanVar()
 timecode_checkbox = Checkbutton(root, text="包含時間碼", font=("Arial", 10), variable=include_timecodes_var, bg="#f0f8ff", activebackground="#e6f7ff")
 timecode_checkbox.pack(pady=10)
 
-# 安裝依賴按鈕
-install_button = tk.Button(root, text="安裝依賴", font=("Arial", 14), bg="#007acc", fg="white", activebackground="#005f99", activeforeground="white", command=install_dependencies)
+# 安裝套件按鈕
+install_button = tk.Button(root, text="安裝套件", font=("Arial", 14), bg="#007acc", fg="white", activebackground="#005f99", activeforeground="white", command=install_dependencies)
 install_button.pack(pady=10, ipadx=10, ipady=5)
 
 # 選擇檔案按鈕
