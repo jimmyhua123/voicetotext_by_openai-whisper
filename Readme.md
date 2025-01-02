@@ -1,5 +1,15 @@
 # Whisper GUI Transcriber
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Attribution
+This project utilizes the following open-source and commercial resources:
+1. **[openai-whisper](https://github.com/openai/whisper)**: An open-source audio-to-text library by OpenAI, licensed under the MIT License.
+2. **[OpenAI API](https://platform.openai.com/overview)**: Powered by OpenAI's GPT model for transcription and natural language processing tasks.
+
+Please refer to the respective licenses for more details.
+
 ## English Version
 
 ### **Overview**
