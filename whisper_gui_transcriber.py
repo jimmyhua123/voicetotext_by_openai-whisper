@@ -85,32 +85,45 @@ def install_dependencies():
 # 建立主視窗
 root = tk.Tk()
 root.title("語音轉文字工具")
-root.geometry("400x400")
+root.geometry("500x500")
+root.configure(bg="#f0f8ff")
 
 # 介面標籤
-label = tk.Label(root, text="選擇音訊檔案以生成逐字稿", font=("Arial", 12))
-label.pack(pady=20)
+label = tk.Label(root, text="語音轉文字工具", font=("Arial", 16, "bold"), bg="#f0f8ff", fg="#333")
+label.pack(pady=10)
+
+subtitle_label = tk.Label(root, text="選擇音訊檔案以生成逐字稿", font=("Arial", 12), bg="#f0f8ff", fg="#555")
+subtitle_label.pack(pady=5)
 
 # 進度標籤
-progress_label = tk.Label(root, text="", font=("Arial", 10), fg="blue")
-progress_label.pack(pady=10)
+progress_label = tk.Label(root, text="", font=("Arial", 10), bg="#f0f8ff", fg="blue")
+progress_label.pack(pady=5)
 
 # 計時標籤
-timer_label = tk.Label(root, text="", font=("Arial", 10), fg="green")
-timer_label.pack(pady=10)
+timer_label = tk.Label(root, text="", font=("Arial", 10), bg="#f0f8ff", fg="green")
+timer_label.pack(pady=5)
 
 # 是否包含時間碼
 include_timecodes_var = BooleanVar()
-timecode_checkbox = Checkbutton(root, text="包含時間碼", font=("Arial", 10), variable=include_timecodes_var)
+timecode_checkbox = Checkbutton(root, text="包含時間碼", font=("Arial", 10), variable=include_timecodes_var, bg="#f0f8ff", activebackground="#e6f7ff")
 timecode_checkbox.pack(pady=10)
 
 # 安裝依賴按鈕
-install_button = tk.Button(root, text="安裝依賴", font=("Arial", 14), command=install_dependencies)
-install_button.pack(pady=10)
+install_button = tk.Button(root, text="安裝依賴", font=("Arial", 14), bg="#007acc", fg="white", activebackground="#005f99", activeforeground="white", command=install_dependencies)
+install_button.pack(pady=10, ipadx=10, ipady=5)
 
 # 選擇檔案按鈕
-select_button = tk.Button(root, text="選擇檔案", font=("Arial", 14), command=lambda: start_transcription(progress_label, timer_label, include_timecodes_var.get()))
-select_button.pack(pady=10)
+select_button = tk.Button(root, text="選擇檔案", font=("Arial", 14), bg="#28a745", fg="white", activebackground="#1e7e34", activeforeground="white", command=lambda: start_transcription(progress_label, timer_label, include_timecodes_var.get()))
+select_button.pack(pady=10, ipadx=10, ipady=5)
+
+# 作者資訊
+author_label = tk.Label(root, text="Made by Jimmy Hua", font=("Arial", 10, "italic"), bg="#f0f8ff", fg="#333")
+author_label.pack(pady=20)
+
+# GitHub 連結
+github_label = tk.Label(root, text="GitHub: voicetotext_by_openai-whisper", font=("Arial", 10, "underline"), bg="#f0f8ff", fg="#007acc", cursor="hand2")
+github_label.pack()
+github_label.bind("<Button-1>", lambda e: os.system("start https://github.com/jimmyhua123/voicetotext_by_openai-whisper/blob/main/whisper_gui_transcriber.py"))
 
 # 啟動主迴圈
 root.mainloop()
