@@ -17,7 +17,14 @@ def update_progress(progress_label, text):
     progress_label.config(text=text)
     progress_label.update()
 
-def transcribe_audio(progress_label, include_timecodes):
+def update_timer(timer_label, start_time):
+    while True:
+        elapsed_time = time.time() - start_time
+        elapsed_minutes, elapsed_seconds = divmod(elapsed_time, 60)
+        timer_label.config(text=f"已花時間：{int(elapsed_minutes)} 分 {int(elapsed_seconds)} 秒")
+        time.sleep(1)
+
+def transcribe_audio(progress_label, timer_label, include_timecodes):
     # 彈出檔案選擇對話框
     audio_file = filedialog.askopenfilename(
         title="選擇音訊檔案",
@@ -31,6 +38,7 @@ def transcribe_audio(progress_label, include_timecodes):
     try:
         # 記錄開始時間
         start_time = time.time()
+        Thread(target=update_timer, args=(timer_label, start_time), daemon=True).start()
 
         # 加載 Whisper 模型
         update_progress(progress_label, "正在加載模型...")
@@ -64,10 +72,11 @@ def transcribe_audio(progress_label, include_timecodes):
         messagebox.showerror("錯誤", f"發生錯誤：{e}")
     finally:
         update_progress(progress_label, "")
+        timer_label.config(text="")
 
-def start_transcription(progress_label, include_timecodes):
+def start_transcription(progress_label, timer_label, include_timecodes):
     # 使用執行緒避免卡住界面
-    Thread(target=transcribe_audio, args=(progress_label, include_timecodes)).start()
+    Thread(target=transcribe_audio, args=(progress_label, timer_label, include_timecodes)).start()
 
 def install_dependencies():
     # 使用執行緒避免卡住界面
@@ -76,7 +85,7 @@ def install_dependencies():
 # 建立主視窗
 root = tk.Tk()
 root.title("語音轉文字工具")
-root.geometry("400x350")
+root.geometry("400x400")
 
 # 介面標籤
 label = tk.Label(root, text="選擇音訊檔案以生成逐字稿", font=("Arial", 12))
@@ -85,6 +94,10 @@ label.pack(pady=20)
 # 進度標籤
 progress_label = tk.Label(root, text="", font=("Arial", 10), fg="blue")
 progress_label.pack(pady=10)
+
+# 計時標籤
+timer_label = tk.Label(root, text="", font=("Arial", 10), fg="green")
+timer_label.pack(pady=10)
 
 # 是否包含時間碼
 include_timecodes_var = BooleanVar()
@@ -96,7 +109,7 @@ install_button = tk.Button(root, text="安裝依賴", font=("Arial", 14), comman
 install_button.pack(pady=10)
 
 # 選擇檔案按鈕
-select_button = tk.Button(root, text="選擇檔案", font=("Arial", 14), command=lambda: start_transcription(progress_label, include_timecodes_var.get()))
+select_button = tk.Button(root, text="選擇檔案", font=("Arial", 14), command=lambda: start_transcription(progress_label, timer_label, include_timecodes_var.get()))
 select_button.pack(pady=10)
 
 # 啟動主迴圈
