@@ -72,14 +72,6 @@ def handle_conversion(timer_label, progress_label):
 
 
 def handle_transcription(include_timecodes, output_srt, language, timer_label, progress_label):
-    """
-    處理音訊轉錄邏輯。
-    :param include_timecodes: 是否包含時間碼
-    :param output_srt: 是否輸出為 SRT 格式
-    :param language: 語言代碼
-    :param timer_label: 用於顯示計時的標籤
-    :param progress_label: 用於顯示進度的標籤
-    """
     audio_file = filedialog.askopenfilename(
         title="選擇音訊檔案",
         filetypes=[("音訊檔案", "*.mp3 *.wav *.flac *.m4a")]
@@ -97,8 +89,38 @@ def handle_transcription(include_timecodes, output_srt, language, timer_label, p
         result = model.transcribe(
             audio_file, language=language, word_timestamps=include_timecodes)
 
+        # 儲存結果
+        base_name = os.path.splitext(os.path.basename(audio_file))[0]
+
+        if output_srt:
+            folder = "srt_files"
+            output_file = generate_unique_filename(folder, base_name, ".srt")
+            with open(output_file, "w", encoding="utf-8") as f:
+                for segment in result['segments']:
+                    start = segment['start']
+                    end = segment['end']
+                    text = segment['text']
+                    start_timecode = time.strftime('%H:%M:%S', time.gmtime(
+                        start)) + f",{int((start % 1) * 1000):03d}"
+                    end_timecode = time.strftime('%H:%M:%S', time.gmtime(
+                        end)) + f",{int((end % 1) * 1000):03d}"
+                    f.write(
+                        f"{segment['id'] + 1}\n{start_timecode} --> {end_timecode}\n{text}\n\n")
+        else:
+            folder = "transcriptions_with_timecodes" if include_timecodes else "transcriptions_without_timecodes"
+            output_file = generate_unique_filename(folder, base_name, ".txt")
+            with open(output_file, "w", encoding="utf-8") as f:
+                if include_timecodes:
+                    for segment in result['segments']:
+                        start = segment['start']
+                        end = segment['end']
+                        text = segment['text']
+                        f.write(f"[{start:.2f} - {end:.2f}] {text}\n")
+                else:
+                    f.write(result["text"])
+
         progress_label.config(text="轉錄完成！")
-        messagebox.showinfo("完成", "轉錄或翻譯已完成！")
+        messagebox.showinfo("完成", f"檔案已儲存至：\n{output_file}")
     except Exception as e:
         messagebox.showerror("錯誤", f"轉錄失敗：{e}")
     finally:
