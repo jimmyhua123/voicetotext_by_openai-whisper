@@ -30,6 +30,10 @@ def update_timer(timer_label, start_time):
             text=f"已花時間：{int(elapsed_minutes)} 分 {int(elapsed_seconds)} 秒")
         time.sleep(1)
 
+def reset_timer(timer_label):
+    timer_label.config(text="已花時間：0 分 0 秒")
+    timer_label.update()
+
 def generate_unique_filename(folder, base_name, extension):
     counter = 1
     if not os.path.exists(folder):
@@ -126,7 +130,7 @@ def transcribe_audio(progress_label, timer_label, include_timecodes, output_srt)
     finally:
         stop_event.clear()
         update_progress(progress_label, "")
-        timer_label.config(text="")
+        reset_timer(timer_label)
 
 def start_audio_transcription(progress_label, timer_label, include_timecodes, output_srt):
     stop_event.clear()
@@ -143,6 +147,7 @@ def install_dependencies():
 def cancel_operation():
     stop_event.set()
     messagebox.showinfo("取消", "操作已取消")
+    reset_timer(timer_label)
 
 def quit_application():
     stop_event.set()
@@ -164,6 +169,7 @@ subtitle_label = tk.Label(header_frame, text="選擇音訊檔案以生成逐字�
 subtitle_label.grid(row=1, column=0)
 subtitle_label = tk.Label(header_frame, text="mp4需先轉成wav or mp3", font=("Arial", 12), bg="#f0f8ff", fg="#555", borderwidth=0, highlightthickness=0)
 subtitle_label.grid(row=2, column=0)
+
 options_frame = tk.Frame(root, bg="#f0f8ff")
 options_frame.pack(pady=20)
 
