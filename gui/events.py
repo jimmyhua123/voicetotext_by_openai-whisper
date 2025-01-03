@@ -71,11 +71,12 @@ def handle_conversion(timer_label, progress_label):
         progress_label.config(text="")
 
 
-def handle_transcription(include_timecodes, output_srt, timer_label, progress_label):
+def handle_transcription(include_timecodes, output_srt, language, timer_label, progress_label):
     """
-    處理音訊轉錄的邏輯。
+    處理音訊轉錄邏輯。
     :param include_timecodes: 是否包含時間碼
     :param output_srt: 是否輸出為 SRT 格式
+    :param language: 語言代碼
     :param timer_label: 用於顯示計時的標籤
     :param progress_label: 用於顯示進度的標籤
     """
@@ -91,10 +92,13 @@ def handle_transcription(include_timecodes, output_srt, timer_label, progress_la
         start_timer(timer_label)
         progress_label.config(text="正在加載模型...")
         model = load_whisper_model("base")
+
         progress_label.config(text="正在轉錄音訊檔案...")
-        transcribe_audio(model, audio_file, include_timecodes, output_srt)
+        result = model.transcribe(
+            audio_file, language=language, word_timestamps=include_timecodes)
+
         progress_label.config(text="轉錄完成！")
-        messagebox.showinfo("完成", "音訊轉錄已成功完成，檔案已儲存！")
+        messagebox.showinfo("完成", "轉錄或翻譯已完成！")
     except Exception as e:
         messagebox.showerror("錯誤", f"轉錄失敗：{e}")
     finally:

@@ -2,7 +2,50 @@
 
 import tkinter as tk
 from tkinter import BooleanVar, Checkbutton
+from tkinter import ttk
 from gui.events import handle_conversion, handle_transcription, cancel_operation, quit_application
+
+
+def create_language_dropdown(root):
+    """
+    創建語言選擇下拉選單
+    :param root: 主窗口
+    :return: 語言選項的變量和語言映射表
+    """
+    languages = [
+        ("自動檢測", "auto"),
+        ("中文", "zh"),
+        ("英文", "en"),
+        ("日文", "ja"),
+        ("法文", "fr"),
+        ("西班牙文", "es"),
+        ("德文", "de")
+    ]
+
+    selected_language = tk.StringVar(value="zh")  # 預設值為中文
+
+    language_frame = tk.Frame(root, bg="#f0f8ff")
+    language_frame.pack(pady=10)
+
+    tk.Label(
+        language_frame,
+        text="選擇語言：",
+        font=("Arial", 12),
+        bg="#f0f8ff",
+        fg="#333"
+    ).grid(row=0, column=0, padx=10, pady=5)
+
+    language_dropdown = ttk.Combobox(
+        language_frame,
+        textvariable=selected_language,
+        values=[lang[0] for lang in languages],  # 顯示語言名稱
+        state="readonly",
+        font=("Arial", 12)
+    )
+    language_dropdown.grid(row=0, column=1, padx=10, pady=5)
+    language_dropdown.set("中文")  # 設置預設選項
+
+    return selected_language, {lang[0]: lang[1] for lang in languages}
 
 
 def create_header(root):
@@ -51,10 +94,40 @@ def create_options(root):
     return include_timecodes_var, output_srt_var
 
 
-def create_buttons(root, include_timecodes_var, output_srt_var, progress_label, timer_label):
-
+def create_buttons(root, include_timecodes_var, output_srt_var, progress_label, timer_label, selected_language, language_map):
+    """
+    創建按鈕，包含處理選擇語音檔案、取消執行等功能
+    :param root: 主窗口
+    :param include_timecodes_var: 是否包含時間碼的選項
+    :param output_srt_var: 是否輸出為 SRT 的選項
+    :param progress_label: 顯示進度的標籤
+    :param timer_label: 顯示計時的標籤
+    :param selected_language: 下拉選擇的語言
+    :param language_map: 語言名稱到代碼的映射
+    """
     button_frame = tk.Frame(root, bg="#f0f8ff")
     button_frame.pack(pady=20)
+
+    select_audio_button = tk.Button(
+        button_frame,
+        text="選擇音訊檔案並執行",
+        font=("Arial", 14),
+        bg="#007acc",
+        fg="white",
+        activebackground="#005f99",
+        activeforeground="white",
+        command=lambda: handle_transcription(
+            include_timecodes_var.get(),
+            output_srt_var.get(),
+            language_map[selected_language.get()],  # 將語言名稱映射為代碼
+            timer_label,
+            progress_label
+        )
+    )
+    select_audio_button.grid(row=0, column=1, padx=10,
+                             pady=10, ipadx=10, ipady=5)
+
+    # 其餘按鈕邏輯保持不變
 
     convert_button = tk.Button(
         button_frame,
@@ -68,20 +141,6 @@ def create_buttons(root, include_timecodes_var, output_srt_var, progress_label, 
     )
     convert_button.grid(row=0, column=0, padx=10, pady=10, ipadx=10, ipady=5)
 
-    select_audio_button = tk.Button(
-        button_frame,
-        text="選擇音訊檔案並執行",
-        font=("Arial", 14),
-        bg="#007acc",
-        fg="white",
-        activebackground="#005f99",
-        activeforeground="white",
-        command=lambda: handle_transcription(
-            include_timecodes_var.get(), output_srt_var.get(), timer_label, progress_label
-        )
-    )
-    select_audio_button.grid(row=0, column=1, padx=10,
-                             pady=10, ipadx=10, ipady=5)
 
     cancel_button = tk.Button(
         button_frame,
