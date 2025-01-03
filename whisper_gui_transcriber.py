@@ -162,7 +162,8 @@ label.grid(row=0, column=0, pady=5)
 
 subtitle_label = tk.Label(header_frame, text="選擇音訊檔案以生成逐字稿或字幕", font=("Arial", 12), bg="#f0f8ff", fg="#555", borderwidth=0, highlightthickness=0)
 subtitle_label.grid(row=1, column=0)
-
+subtitle_label = tk.Label(header_frame, text="mp4需先轉成wav or mp3", font=("Arial", 12), bg="#f0f8ff", fg="#555", borderwidth=0, highlightthickness=0)
+subtitle_label.grid(row=2, column=0)
 options_frame = tk.Frame(root, bg="#f0f8ff")
 options_frame.pack(pady=20)
 
