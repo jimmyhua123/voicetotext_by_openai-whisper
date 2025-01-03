@@ -200,7 +200,7 @@ select_audio_button = tk.Button(button_frame, text="選擇音訊檔案並執行"
                                  activebackground="#005f99", activeforeground="white", command=lambda: start_audio_transcription(progress_label, timer_label, include_timecodes_var.get(), output_srt_var.get()))
 select_audio_button.grid(row=0, column=1, padx=10, pady=10, ipadx=10, ipady=5)
 
-cancel_button = tk.Button(button_frame, text="取消執行", font=("Arial", 14), bg="#ffc107", fg="black",
+cancel_button = tk.Button(button_frame, text="取消執行/重製時間", font=("Arial", 14), bg="#ffc107", fg="black",
                            activebackground="#d39e00", activeforeground="black", command=cancel_operation)
 cancel_button.grid(row=1, column=0, padx=10, pady=10, ipadx=10, ipady=5)
 
