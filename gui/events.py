@@ -72,6 +72,8 @@ def handle_conversion(timer_label, progress_label):
 
 
 def handle_transcription(include_timecodes, output_srt, language, timer_label, progress_label):
+    if language == "auto":  # 如果選擇了 "自動檢測"
+        language = None  # Whisper 自動檢測語言時需要傳遞 None
     audio_file = filedialog.askopenfilename(
         title="選擇音訊檔案",
         filetypes=[("音訊檔案", "*.mp3 *.wav *.flac *.m4a")]

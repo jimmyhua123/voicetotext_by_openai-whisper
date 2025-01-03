@@ -33,7 +33,7 @@ def create_language_dropdown(root):
         font=("Arial", 12),
         bg="#f0f8ff",
         fg="#333"
-    ).grid(row=0, column=0, padx=10, pady=5)
+    ).grid(row=0, column=0, padx=5, pady=2)
 
     language_dropdown = ttk.Combobox(
         language_frame,
@@ -42,7 +42,7 @@ def create_language_dropdown(root):
         state="readonly",
         font=("Arial", 12)
     )
-    language_dropdown.grid(row=0, column=1, padx=10, pady=5)
+    language_dropdown.grid(row=0, column=1, padx=5, pady=2)
     language_dropdown.set("中文")  # 設置預設選項
 
     return selected_language, {lang[0]: lang[1] for lang in languages}
@@ -169,7 +169,7 @@ def create_buttons(root, include_timecodes_var, output_srt_var, progress_label, 
 
 def create_status(root):
     status_frame = tk.Frame(root, bg="#f0f8ff")
-    status_frame.pack(pady=10)
+    status_frame.pack(pady=5)
 
     progress_label = tk.Label(
         status_frame,
@@ -178,7 +178,7 @@ def create_status(root):
         bg="#f0f8ff",
         fg="blue"
     )
-    progress_label.grid(row=0, column=0, pady=5)
+    progress_label.grid(row=0, column=0, pady=2)
 
     timer_label = tk.Label(
         status_frame,
@@ -187,6 +187,6 @@ def create_status(root):
         bg="#f0f8ff",
         fg="green"
     )
-    timer_label.grid(row=1, column=0, pady=5)
+    timer_label.grid(row=1, column=0, pady=2)
 
     return progress_label, timer_label
