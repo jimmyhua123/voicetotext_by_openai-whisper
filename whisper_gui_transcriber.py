@@ -75,8 +75,7 @@ def transcribe_audio(progress_label, timer_label, include_timecodes, output_srt)
 
     try:
         start_time = time.time()
-        timer_thread = Thread(target=update_timer, args=(
-            timer_label, start_time), daemon=True)
+        timer_thread = Thread(target=update_timer, args=(timer_label, start_time), daemon=True)
         timer_thread.start()
 
         update_progress(progress_label, "正在加載模型...")
@@ -84,7 +83,10 @@ def transcribe_audio(progress_label, timer_label, include_timecodes, output_srt)
 
         update_progress(progress_label, "正在轉錄音訊檔案...")
         result = model.transcribe(
-            audio_file, word_timestamps=include_timecodes)
+            audio_file, 
+            word_timestamps=include_timecodes, 
+            language="zh"  # 強制指定輸出語言為中文
+        )
 
         base_name = os.path.splitext(os.path.basename(audio_file))[0]
 
