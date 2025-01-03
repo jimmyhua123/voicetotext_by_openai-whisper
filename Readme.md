@@ -1,5 +1,15 @@
 # Whisper GUI Transcriber
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Attribution
+This project utilizes the following open-source and commercial resources:
+1. **[openai-whisper](https://github.com/openai/whisper)**: An open-source audio-to-text library by OpenAI, licensed under the MIT License.
+2. **[OpenAI API](https://platform.openai.com/overview)**: Powered by OpenAI's GPT model for transcription and natural language processing tasks.
+
+Please refer to the respective licenses for more details.
+
 ## English Version
 
 ### **Overview**
@@ -62,7 +72,7 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
 1. **支持多種音訊格式**：適用於 MP3、WAV、FLAC 和 M4A。
 2. **時間碼選項**：逐字稿中可包含時間標記。
 3. **實時進度顯示**：界面顯示當前進度和已花時間。
-4. **一鍵安裝依賴**：自動安裝所需的軟體包。
+4. **一鍵安裝套件**：自動安裝所需的軟體包。
 
 ---
 
@@ -76,7 +86,7 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
    ```bash
    cd voicetotext_by_openai-whisper
    ```
-4. 如需手動安裝依賴：
+4. 如需手動安裝套件：
    ```bash
    pip install openai-whisper ffmpeg-python
    ```
@@ -88,7 +98,7 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
    ```bash
    python whisper_gui_transcriber.py
    ```
-2. 點擊 "安裝依賴" 按鈕以安裝所需的軟體包（如尚未安裝）。
+2. 點擊 "安裝套件" 按鈕以安裝所需的軟體包（如尚未安裝）。
 3. 選擇音訊文件，並根據需要啟用 "包含時間碼" 選項。
 4. 界面會顯示實時進度和已花時間。
 5. 完成後，下載生成的逐字稿文件。
