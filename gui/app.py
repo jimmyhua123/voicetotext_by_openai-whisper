@@ -22,7 +22,8 @@ def run_app():
     progress_label, timer_label = create_status(root)
 
     # Buttons
-    create_buttons(root, include_timecodes_var, output_srt_var, progress_label, timer_label)
+    create_buttons(root, include_timecodes_var,
+                   output_srt_var, progress_label, timer_label)
 
     # Event to quit
     root.protocol("WM_DELETE_WINDOW", lambda: quit_application(root))

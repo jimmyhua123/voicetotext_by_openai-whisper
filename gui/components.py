@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import BooleanVar, Checkbutton
+from gui.events import handle_conversion, handle_transcription, cancel_operation, quit_application
 
 
 def create_header(root):
@@ -51,7 +52,6 @@ def create_options(root):
 
 
 def create_buttons(root, include_timecodes_var, output_srt_var, progress_label, timer_label):
-    from .events import handle_conversion, handle_transcription, cancel_operation, quit_application
 
     button_frame = tk.Frame(root, bg="#f0f8ff")
     button_frame.pack(pady=20)
@@ -64,7 +64,7 @@ def create_buttons(root, include_timecodes_var, output_srt_var, progress_label, 
         fg="white",
         activebackground="#1e7e34",
         activeforeground="white",
-        command=handle_conversion
+        command=lambda: handle_conversion(timer_label, progress_label)
     )
     convert_button.grid(row=0, column=0, padx=10, pady=10, ipadx=10, ipady=5)
 
@@ -77,7 +77,7 @@ def create_buttons(root, include_timecodes_var, output_srt_var, progress_label, 
         activebackground="#005f99",
         activeforeground="white",
         command=lambda: handle_transcription(
-            include_timecodes_var.get(), output_srt_var.get()
+            include_timecodes_var.get(), output_srt_var.get(), timer_label, progress_label
         )
     )
     select_audio_button.grid(row=0, column=1, padx=10,
@@ -91,7 +91,7 @@ def create_buttons(root, include_timecodes_var, output_srt_var, progress_label, 
         fg="black",
         activebackground="#d39e00",
         activeforeground="black",
-        command=lambda: cancel_operation(progress_label, timer_label)
+        command=lambda: cancel_operation(timer_label, progress_label)
     )
     cancel_button.grid(row=1, column=0, padx=10, pady=10, ipadx=10, ipady=5)
 
