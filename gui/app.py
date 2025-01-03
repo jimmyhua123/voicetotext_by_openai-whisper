@@ -45,10 +45,10 @@ def run_app():
 
 def add_footer(root):
     """
-    在視窗底部添加作者資訊與 GitHub 連結。
+    在視窗底部添加置中的作者資訊與 GitHub 連結。
     """
     footer_frame = tk.Frame(root, bg="#f0f8ff")
-    footer_frame.pack(side=tk.BOTTOM, pady=5)
+    footer_frame.pack(side=tk.BOTTOM, pady=10, fill=tk.X)  # 將 frame 延伸至整個寬度以便置中
 
     # 作者資訊
     author_label = tk.Label(
@@ -56,9 +56,10 @@ def add_footer(root):
         text="Made by Jimmy Hua",
         font=("Arial", 10, "italic"),
         bg="#f0f8ff",
-        fg="#555"
+        fg="#555",
+        anchor="center"  # 將文字置中
     )
-    author_label.grid(row=0, column=0, padx=5, sticky="w")
+    author_label.pack(anchor="center")  # 將 label 置中
 
     # GitHub 連結
     github_label = tk.Label(
@@ -69,15 +70,17 @@ def add_footer(root):
         fg="blue",
         cursor="hand2"
     )
-    github_label.grid(row=1, column=0, padx=5, sticky="w")
+    github_label.pack(anchor="center")  # 將 label 置中
 
     # 點擊 GitHub 連結時開啟瀏覽器
     github_label.bind("<Button-1>", lambda e: open_github(
         "https://github.com/jimmyhua123/voicetotext_by_openai-whisper"
     ))
 
+
 def open_github(url):
     """
     開啟指定的 GitHub 頁面。
     """
+    import webbrowser
     webbrowser.open_new_tab(url)
