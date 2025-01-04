@@ -8,7 +8,7 @@ This project utilizes the following open-source and commercial resources:
 1. **[openai-whisper](https://github.com/openai/whisper)**: An open-source audio-to-text library by OpenAI, licensed under the MIT License.
 2. **[OpenAI API](https://platform.openai.com/overview)**: Powered by OpenAI's GPT model for transcription and natural language processing tasks.
 
-Please refer to the respective licenses for more details.
+---
 
 ## English Version
 
@@ -22,6 +22,7 @@ Whisper GUI Transcriber is a user-friendly application for converting audio file
 2. **Timestamp Option**: Include time markers in the transcription.
 3. **Real-time Progress**: Displays the current progress and elapsed time.
 4. **One-click Dependency Installation**: Automatically installs required libraries.
+5. **Multi-language Support**: Includes support for languages like English, Chinese, Japanese, etc.
 
 ---
 
@@ -30,35 +31,30 @@ Whisper GUI Transcriber is a user-friendly application for converting audio file
 2. Clone this repository:
    ```bash
    git clone https://github.com/jimmyhua123/voicetotext_by_openai-whisper.git
-   ```
-3. Navigate to the project directory:
-   ```bash
-   cd voicetotext_by_openai-whisper
-   ```
-4. Install dependencies manually if needed:
-   ```bash
-   pip install openai-whisper ffmpeg-python
-   ```
+3. cd voicetotext_by_openai-whisper
+4. pip install openai-whisper ffmpeg-python
+5. Ensure FFmpeg is installed on your system:
+Windows: choco install ffmpeg
+MacOS: brew install ffmpeg
+Ubuntu: sudo apt install ffmpeg
 
 ---
 
 ### **Usage**
 1. Run the application:
    ```bash
-   python whisper_gui_transcriber.py
+   python main.py
    ```
 2. Click "Install Dependencies" to install required libraries (if not already installed).
 3. Select an audio file and optionally enable the "Include Timestamp" checkbox.
 4. View real-time progress and elapsed time on the interface.
-5. Once complete, download the transcription file.
+5. Once complete, the transcription file will be saved locally.
 
 ---
 
 ### **Credits**
 - **Author**: Jimmy Hua  
 - **GitHub**: [Whisper GUI Transcriber](https://github.com/jimmyhua123/voicetotext_by_openai-whisper/blob/main/whisper_gui_transcriber.py)
-
-- **Colab Version**: [Colab](https://colab.research.google.com/drive/12WNpxOrf0jBeYUn66eh8MLKwIE-LP4LX#scrollTo=vND_tVbffmgh)
 ---
 
 ## 中文版本
@@ -73,6 +69,7 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
 2. **時間碼選項**：逐字稿中可包含時間標記。
 3. **實時進度顯示**：界面顯示當前進度和已花時間。
 4. **一鍵安裝套件**：自動安裝所需的軟體包。
+5. **多語言支持** : 支持中文、英文、日文等多種語言。
 
 ---
 
@@ -90,13 +87,20 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
    ```bash
    pip install openai-whisper ffmpeg-python
    ```
+5. 確保系統已安裝 FFmpeg 工具：
+   Windows: choco install ffmpeg
+   MacOS: brew install ffmpeg
+   Ubuntu: sudo apt install ffmpeg
+
+
+
 
 ---
 
 ### **使用方法**
 1. 啟動應用：
    ```bash
-   python whisper_gui_transcriber.py
+   python main.py
    ```
 2. 點擊 "安裝套件" 按鈕以安裝所需的軟體包（如尚未安裝）。
 3. 選擇音訊文件，並根據需要啟用 "包含時間碼" 選項。
@@ -108,6 +112,3 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
 ### **致謝**
 - **作者**: Jimmy Hua  
 - **GitHub**: [Whisper GUI Transcriber](https://github.com/jimmyhua123/voicetotext_by_openai-whisper/blob/main/whisper_gui_transcriber.py)
-
-
-- **Colab 版本**: [Colab](https://colab.research.google.com/drive/12WNpxOrf0jBeYUn66eh8MLKwIE-LP4LX#scrollTo=vND_tVbffmgh)
