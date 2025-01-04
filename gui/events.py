@@ -6,9 +6,33 @@ from transcription.model import load_whisper_model
 from transcription.transcription import transcribe_audio
 from transcription.utils import generate_unique_filename
 from conversion.ffmpeg_wrapper import convert_mp4_to_wav
+import subprocess
+from tkinter import messagebox
+
 
 # 定義全域停止事件
 stop_event = Event()
+
+
+def install_dependencies():
+    """
+    安裝所需的套件，執行前彈出確認視窗。
+    """
+    confirm = messagebox.askyesno(
+        "確認安裝",
+        "此操作將安裝所需套件，可能需要一些時間。\n確定要繼續嗎？"
+    )
+    if not confirm:
+        messagebox.showinfo("取消", "安裝已取消")
+        return
+
+    try:
+        subprocess.check_call(
+            ["pip", "install", "-r", "requirements.txt"]
+        )
+        messagebox.showinfo("完成", "所需套件已成功安裝！")
+    except Exception as e:
+        messagebox.showerror("錯誤", f"安裝過程中發生錯誤：{e}")
 
 
 def start_timer(timer_label):
