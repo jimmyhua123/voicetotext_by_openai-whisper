@@ -1,8 +1,5 @@
-以下是更新的 `Readme.md`，包含使用 GPU 執行程序時需要安裝的套件和相關步驟。
 
----
-
-### 更新後的 **Readme.md**
+### **Readme.md**
 
 ```markdown
 # Whisper GUI Transcriber
@@ -164,5 +161,3 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
    - 提供適用於不同操作系統的安裝指令。
 
 3. **與中文版本同步的安裝步驟**。
-
-如果還有其他需求，請隨時告訴我！ 😊
