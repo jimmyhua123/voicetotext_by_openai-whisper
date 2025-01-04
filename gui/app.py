@@ -2,8 +2,6 @@ import tkinter as tk
 from gui.components import create_header, create_options, create_buttons, create_status, create_language_dropdown
 from gui.events import handle_conversion, handle_transcription, quit_application
 import webbrowser
-from gui.events import install_dependencies
-
 
 def run_app():
     root = tk.Tk()
@@ -35,10 +33,7 @@ def run_app():
         language_map
     )
 
-    # Install dependencies button
-    create_install_button(root, timer_label)
-
-    # Add footer with author and GitHub link
+    # Footer with author and GitHub link
     add_footer(root)
 
     # Event to quit
@@ -46,31 +41,6 @@ def run_app():
 
     root.mainloop()
 
-
-def create_install_button(root, timer_label):
-    """
-    創建一個按鈕，用於安裝所需套件，並與 "已花時間" 左側對稱。
-    """
-    status_frame = tk.Frame(root, bg="#f0f8ff")
-    status_frame.pack(pady=5)
-
-    # "安裝所需套件" 按鈕
-    install_button = tk.Button(
-        status_frame,
-        text="安裝所需套件",
-        font=("Arial", 10),
-        bg="#17a2b8",
-        fg="white",
-        activebackground="#138496",
-        activeforeground="white",
-        command=install_dependencies
-    )
-    install_button.grid(row=1, column=0, padx=20, pady=5)
-
-    # "已花時間" 標籤
-    timer_label.grid(row=1, column=1, padx=20, pady=5)
-
-    return install_button
 
 
 def add_footer(root):
