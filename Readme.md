@@ -30,15 +30,20 @@ Whisper GUI Transcriber is a user-friendly application for converting audio file
 2. Clone this repository:
    ```bash
    git clone https://github.com/jimmyhua123/voicetotext_by_openai-whisper.git
-3. cd voicetotext_by_openai-whisper
+3. cd 
    ```bash
    cd voicetotext_by_openai-whisper
    ```
-5. pip install openai-whisper ffmpeg-python
+4. install 
    ```bash
-   pip install openai-whisper ffmpeg-python
+   pip install openai-whisper ffmpeg-python tk
    ```
-6. Ensure FFmpeg is installed on your system:
+   or
+   ```
+   pip install -r requirements.txt
+   ```
+
+5. Ensure FFmpeg is installed on your system:
    Windows: choco install ffmpeg
    MacOS: brew install ffmpeg
    Ubuntu: sudo apt install ffmpeg
@@ -89,7 +94,11 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
    ```
 4. 如需手動安裝套件：
    ```bash
-   pip install openai-whisper ffmpeg-python
+   pip install openai-whisper ffmpeg-python tk
+   ```
+   or
+   ```
+   pip install -r requirements.txt
    ```
 5. 確保系統已安裝 FFmpeg 工具：
    Windows: choco install ffmpeg
