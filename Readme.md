@@ -1,3 +1,10 @@
+以下是更新的 `Readme.md`，包含使用 GPU 執行程序時需要安裝的套件和相關步驟。
+
+---
+
+### 更新後的 **Readme.md**
+
+```markdown
 # Whisper GUI Transcriber
 
 ## License
@@ -30,23 +37,34 @@ Whisper GUI Transcriber is a user-friendly application for converting audio file
 2. Clone this repository:
    ```bash
    git clone https://github.com/jimmyhua123/voicetotext_by_openai-whisper.git
-3. cd 
+   ```
+3. Navigate to the project directory:
    ```bash
    cd voicetotext_by_openai-whisper
    ```
-4. install 
+4. Install required Python packages:
    ```bash
-   pip install openai-whisper ffmpeg-python tk
-   ```
-   or
-   ```
    pip install -r requirements.txt
    ```
 
-5. Ensure FFmpeg is installed on your system:
-   Windows: choco install ffmpeg
-   MacOS: brew install ffmpeg
-   Ubuntu: sudo apt install ffmpeg
+5. **Using GPU for Acceleration**:
+   - Ensure your system has a **NVIDIA GPU** with CUDA installed.
+   - Install the following additional Python packages:
+     ```bash
+     pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+     ```
+     - Replace `cu118` with the appropriate version for your CUDA installation.
+   - Confirm GPU availability in Python:
+     ```python
+     import torch
+     print("是否有可用的 GPU:", torch.cuda.is_available())
+     if torch.cuda.is_available():
+         print("GPU 名稱:", torch.cuda.get_device_name(0))
+     ```
+   - Install **FFmpeg** on your system:
+     - **Windows**: `choco install ffmpeg`
+     - **MacOS**: `brew install ffmpeg`
+     - **Ubuntu**: `sudo apt install ffmpeg`
 
 ---
 
@@ -55,16 +73,16 @@ Whisper GUI Transcriber is a user-friendly application for converting audio file
    ```bash
    python main.py
    ```
-2. Click "Install Dependencies" to install required libraries (if not already installed).
-3. Select an audio file and optionally enable the "Include Timestamp" checkbox.
-4. View real-time progress and elapsed time on the interface.
-5. Once complete, the transcription file will be saved locally.
+2. Select an audio file and optionally enable the "Include Timestamp" checkbox.
+3. View real-time progress and elapsed time on the interface.
+4. Once complete, the transcription file will be saved locally.
 
 ---
 
 ### **Credits**
 - **Author**: Jimmy Hua  
-- **GitHub**: [Whisper GUI Transcriber](https://github.com/jimmyhua123/voicetotext_by_openai-whisper/blob/main/whisper_gui_transcriber.py)
+- **GitHub**: [Whisper GUI Transcriber](https://github.com/jimmyhua123/voicetotext_by_openai-whisper)
+
 ---
 
 ## 中文版本
@@ -83,7 +101,7 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
 ---
 
 ### **安裝**
-1. 安裝 Python 3.7 或更高版本 經測試Python 3.13 不行 我是用Python3.11.1。
+1. 安裝 Python 3.7 或更高版本 經測試Python 3.13 不行 我是用 Python3.11.1。
 2. 克隆此倉庫：
    ```bash
    git clone https://github.com/jimmyhua123/voicetotext_by_openai-whisper.git
@@ -92,21 +110,30 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
    ```bash
    cd voicetotext_by_openai-whisper
    ```
-4. 如需手動安裝套件：
+4. 安裝所需的 Python 套件：
    ```bash
-   pip install openai-whisper ffmpeg-python tk
-   ```
-   or
-   ```
    pip install -r requirements.txt
    ```
-5. 確保系統已安裝 FFmpeg 工具：
-   Windows: choco install ffmpeg
-   MacOS: brew install ffmpeg
-   Ubuntu: sudo apt install ffmpeg
 
+5. **啟用 GPU 加速**：
+   - 確保你的系統有 **NVIDIA GPU** 並已安裝 CUDA 工具包。
+   - 安裝以下 Python 套件：
+     ```bash
+     pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+     ```
+     - 根據你的 CUDA 版本調整 `cu118`。
+   - 在 Python 中確認 GPU 狀態：
+     ```python
+     import torch
+     print("是否有可用的 GPU:", torch.cuda.is_available())
+     if torch.cuda.is_available():
+         print("GPU 名稱:", torch.cuda.get_device_name(0))
+     ```
 
-
+6. 確保系統已安裝 FFmpeg 工具：
+   - **Windows**: `choco install ffmpeg`
+   - **MacOS**: `brew install ffmpeg`
+   - **Ubuntu**: `sudo apt install ffmpeg`
 
 ---
 
@@ -115,13 +142,27 @@ Whisper GUI Transcriber 是一款用戶友好的語音轉文字工具，基於 O
    ```bash
    python main.py
    ```
-2. 點擊 "安裝套件" 按鈕以安裝所需的軟體包（如尚未安裝）。
-3. 選擇音訊文件，並根據需要啟用 "包含時間碼" 選項。
-4. 界面會顯示實時進度和已花時間。
-5. 完成後，下載生成的逐字稿文件。
+2. 選擇音訊文件，並根據需要啟用 "包含時間碼" 選項。
+3. 界面會顯示實時進度和已花時間。
+4. 完成後，生成的逐字稿文件將儲存於本地。
 
 ---
 
 ### **致謝**
 - **作者**: Jimmy Hua  
-- **GitHub**: [Whisper GUI Transcriber](https://github.com/jimmyhua123/voicetotext_by_openai-whisper/blob/main/whisper_gui_transcriber.py)
+- **GitHub**: [Whisper GUI Transcriber](https://github.com/jimmyhua123/voicetotext_by_openai-whisper)
+```
+
+---
+
+### 更新內容
+1. **增加了 GPU 相關安裝指引**：
+   - 說明如何安裝 `torch` 支持 CUDA。
+   - 提供驗證 GPU 是否可用的代碼。
+
+2. **完整的 FFmpeg 安裝方法**：
+   - 提供適用於不同操作系統的安裝指令。
+
+3. **與中文版本同步的安裝步驟**。
+
+如果還有其他需求，請隨時告訴我！ 😊
