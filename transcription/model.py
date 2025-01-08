@@ -2,6 +2,7 @@
 
 import whisper
 
+
 def load_whisper_model(model_size="base"):
     """
     載入 Whisper 模型。

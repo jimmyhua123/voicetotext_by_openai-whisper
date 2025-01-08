@@ -108,13 +108,15 @@ def transcribe_audio(progress_label, timer_label, include_timecodes, output_srt)
                     end = segment['end']
                     text = segment['text']
 
-                    start_timecode = time.strftime('%H:%M:%S', time.gmtime(
-                        start)) + f",{int((start % 1) * 1000):03d}"
-                    end_timecode = time.strftime('%H:%M:%S', time.gmtime(
-                        end)) + f",{int((end % 1) * 1000):03d}"
+                    start_timecode = time.strftime(
+                        '%H/%M/%S', time.gmtime(start)) + f",{int((start % 1) * 1000):03d}"
+                    end_timecode = time.strftime(
+                        '%H/%M/%S', time.gmtime(end)) + f",{int((end % 1) * 1000):03d}"
 
-                    f.write(
-                        f"{segment['id'] + 1}\n{start_timecode} --> {end_timecode}\n{text}\n\n")
+                    start_timecode = time.strftime(
+                        '%H/%M/%S', time.gmtime(start))
+                    end_timecode = time.strftime('%H/%M/%S', time.gmtime(end))
+                    f.write(f"[{start_timecode} - {end_timecode}] {text}\n")
 
             output_file = srt_file
         else:

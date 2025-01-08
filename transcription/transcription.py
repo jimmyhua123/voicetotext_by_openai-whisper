@@ -39,13 +39,13 @@ def transcribe_audio(model, audio_file, include_timecodes, output_srt, progress_
                     end = segment['end']
                     text = segment['text']
 
-                    start_timecode = time.strftime('%H:%M:%S', time.gmtime(
-                        start)) + f",{int((start % 1) * 1000):03d}"
-                    end_timecode = time.strftime('%H:%M:%S', time.gmtime(
-                        end)) + f",{int((end % 1) * 1000):03d}"
+                    start_timecode = time.strftime(
+                        '%H/%M/%S', time.gmtime(start)) + f",{int((start % 1) * 1000):03d}"
+                    end_timecode = time.strftime(
+                        '%H/%M/%S', time.gmtime(end)) + f",{int((end % 1) * 1000):03d}"
 
-                    f.write(
-                        f"{segment['id'] + 1}\n{start_timecode} --> {end_timecode}\n{text}\n\n")
+                    f.write(f"[{start:.2f} - {end:.2f}] {text}\n")
+
         else:
             folder = "transcriptions_with_timecodes" if include_timecodes else "transcriptions_without_timecodes"
             output_file = generate_unique_filename(folder, base_name, ".txt")

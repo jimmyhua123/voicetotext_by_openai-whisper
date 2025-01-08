@@ -3,6 +3,7 @@ from gui.components import create_header, create_options, create_buttons, create
 from gui.events import handle_conversion, handle_transcription, quit_application
 import webbrowser
 
+
 def run_app():
     root = tk.Tk()
     root.title("語音轉文字工具")
@@ -40,7 +41,6 @@ def run_app():
     root.protocol("WM_DELETE_WINDOW", lambda: quit_application(root))
 
     root.mainloop()
-
 
 
 def add_footer(root):

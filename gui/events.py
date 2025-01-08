@@ -16,7 +16,7 @@ stop_event = Event()
 
 def start_timer(timer_label):
     """
-    啟動計時器。
+    啟動計時器，並讓時間即時更新。
     :param timer_label: 顯示計時的標籤
     """
     stop_event.clear()
@@ -25,10 +25,11 @@ def start_timer(timer_label):
     def timer_thread():
         while not stop_event.is_set():
             elapsed_time = time.time() - start_time
-            minutes, seconds = divmod(int(elapsed_time), 60)
-            timer_label.config(text=f"已花時間：{minutes} 分 {seconds} 秒")
+            hours, remainder = divmod(int(elapsed_time), 3600)
+            minutes, seconds = divmod(remainder, 60)
+            timer_label.config(text=f"已花時間：{hours} 小時 {minutes} 分 {seconds} 秒")
             timer_label.update()
-            time.sleep(1)
+            time.sleep(1)  # 每秒更新一次
 
     Thread(target=timer_thread, daemon=True).start()
 
@@ -38,7 +39,7 @@ def reset_timer(timer_label):
     重置計時器的顯示。
     :param timer_label: 用於顯示計時器的標籤
     """
-    timer_label.config(text="已花時間：0 分 0 秒")
+    timer_label.config(text="已花時間：0 小時 0 分 0 秒")
     timer_label.update()
 
 
@@ -75,6 +76,7 @@ def handle_conversion(timer_label, progress_label):
 
 
 def handle_transcription(include_timecodes, output_srt, language, timer_label, progress_label):
+
     if language == "auto":  # 如果選擇了 "自動檢測"
         language = None  # Whisper 自動檢測語言時需要傳遞 None
     audio_file = filedialog.askopenfilename(
@@ -105,10 +107,11 @@ def handle_transcription(include_timecodes, output_srt, language, timer_label, p
                     start = segment['start']
                     end = segment['end']
                     text = segment['text']
-                    start_timecode = time.strftime('%H:%M:%S', time.gmtime(
-                        start)) + f",{int((start % 1) * 1000):03d}"
-                    end_timecode = time.strftime('%H:%M:%S', time.gmtime(
-                        end)) + f",{int((end % 1) * 1000):03d}"
+                    start_timecode = time.strftime(
+                        '%H/%M/%S', time.gmtime(start)) + f",{int((start % 1) * 1000):03d}"
+                    end_timecode = time.strftime(
+                        '%H/%M/%S', time.gmtime(end)) + f",{int((end % 1) * 1000):03d}"
+
                     f.write(
                         f"{segment['id'] + 1}\n{start_timecode} --> {end_timecode}\n{text}\n\n")
         else:
